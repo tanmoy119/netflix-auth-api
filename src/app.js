@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require("cors");
 app.use(express.json());
+const loginRouter = require("./routers/login");
 
 
 const allowedOrigins = ["http://localhost:3000","http://localhost:5000"];
@@ -22,10 +23,11 @@ const allowedOrigins = ["http://localhost:3000","http://localhost:5000"];
         })
     ); 
 
-// port
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 require('./db/conn');
+
+app.use(loginRouter);
  
 
 app.listen(port, ()=>{
